@@ -6,15 +6,161 @@
     <title>Обо мне</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Общие настройки — без margin collapse и с контролем отступов */
+        * {
+            box-sizing: border-box;
+        }
         body {
-            padding-top: 70px;
             margin: 0;
+            padding-top: 70px; /* Высота фиксированной навигации */
+            background: #0f0f15;
+            color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Неоновый стиль заголовка */
+        @keyframes neonGlow {
+            0%, 100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 30px #00f5ff; }
+            50% { text-shadow: 0 0 3px #0ff, 0 0 8px #0ff, 0 0 12px #0ff, 0 0 25px #00f5ff; }
+        }
+        h2 {
+            font-size: 2.4rem;
+            text-align: center;
+            margin: 30px 0 25px;
+            color: #fff;
+            animation: neonGlow 2s infinite alternate;
+            letter-spacing: 1px;
+        }
+
+        /* Контейнер для контента — строгие отступы */
+        .about-content {
+            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Фото в неоновой рамке */
+        .neon-frame {
+            display: block;
+            margin: 25px auto 30px;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 12px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.5);
+            border: 3px solid transparent;
+        }
+        .neon-frame::before {
+            content: '';
+            position: absolute;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00f5ff, #00ff9d, #00f5ff);
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .neon-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #111;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin: 16px 0;
+            text-align: center;
+            color: #e0e0ff;
+        }
+
+        /* Кнопка "Подробнее" — неон + клик */
+        .btn {
+            display: block;
+            margin: 25px auto;
+            padding: 12px 30px;
+            background: transparent;
+            color: #00f5ff;
+            border: 2px solid #00f5ff;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: 0 0 15px #00f5ff;
+        }
+
+        /* Скрытие/показ дополнительного текста */
+        .hidden {
+            display: none;
+        }
+        .show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Навыки — неоновые теги */
+        .skills {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .skills h3 {
+            margin-bottom: 15px;
+            color: #00f5ff;
+            font-size: 1.4rem;
+        }
+        .skill {
+            display: inline-block;
+            background: rgba(0, 123, 255, 0.2);
+            color: #00f5ff;
+            padding: 8px 20px;
+            margin: 6px;
+            border-radius: 30px;
+            font-weight: bold;
+            border: 1px solid #007bff;
+            text-shadow: 0 0 6px rgba(0, 245, 255, 0.7);
+            transition: transform 0.2s;
+        }
+        .skill:hover {
+            transform: scale(1.05);
+            background: rgba(0, 245, 255, 0.15);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-top: 30px;
+            border-top: 1px solid rgba(0, 123, 255, 0.2);
+        }
+
+        /* Адаптация под мобильные */
+        @media (max-width: 600px) {
+            h2 { font-size: 2rem; }
+            .neon-frame { width: 180px; height: 180px; }
+            .about-content { padding: 0 15px; }
+            p { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Адаптивная навигация — копия из index.html -->
+    <!-- Навигация (оставлена как есть, но теперь она гармонирует со стилем) -->
     <nav style="
         background: #007bff;
         padding: 12px 0;
@@ -45,16 +191,14 @@
 
     <main>
         <section id="about">
-            <!-- Фото — центрированное, круглое, под навигацией -->
-            <div style="text-align: center; margin: 20px auto; max-width: 80%; overflow: hidden;">
-                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" 
-                     alt="Фото разработчика" 
-                     style="width: 100%; max-width: 400px; border-radius: 50%; border: 4px solid #007bff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <!-- Неоновая круглая рамка с фото -->
+            <div class="neon-frame">
+                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика">
             </div>
 
-            <!-- Текст ниже фото -->
-            <div class="about-content" style="padding: 20px; max-width: 80%; margin: 0 auto;">
+            <div class="about-content">
                 <h2>Обо мне</h2>
+
                 <p>Я фронтенд-разработчик с опытом создания интерактивных веб-сайтов. Использую современные технологии: HTML5, CSS3, JavaScript (ES6+).</p>
 
                 <button id="toggle-details" class="btn">Подробнее</button>
@@ -64,13 +208,13 @@
                     <p>В свободное время участвую в open-source проектах, изучаю новые фреймворки и пишу статьи в блог.</p>
                 </div>
 
-                <div class="skills" style="margin-top: 20px;">
+                <div class="skills">
                     <h3>Мои навыки:</h3>
-                    <span class="skill" style="display: inline-block; background: #007bff; color: white; padding: 8px 16px; margin: 5px; border-radius: 20px; font-weight: bold;">JavaScript</span>
-                    <span class="skill" style="display: inline-block; background: #007bff; color: white; padding: 8px 16px; margin: 5px; border-radius: 20px; font-weight: bold;">React</span>
-                    <span class="skill" style="display: inline-block; background: #007bff; color: white; padding: 8px 16px; margin: 5px; border-radius: 20px; font-weight: bold;">CSS</span>
-                    <span class="skill" style="display: inline-block; background: #007bff; color: white; padding: 8px 16px; margin: 5px; border-radius: 20px; font-weight: bold;">Git</span>
-                    <span class="skill" style="display: inline-block; background: #007bff; color: white; padding: 8px 16px; margin: 5px; border-radius: 20px; font-weight: bold;">UI/UX</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">UI/UX</span>
                 </div>
             </div>
         </section>
@@ -80,19 +224,12 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.getElementById('toggle-details').addEventListener('click', function() {
+            const extra = document.getElementById('extra-details');
+            extra.classList.toggle('show');
+            this.textContent = extra.classList.contains('show') ? 'Скрыть' : 'Подробнее';
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
