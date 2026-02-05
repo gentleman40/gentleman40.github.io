@@ -1,8 +1,9 @@
-" pla<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Портфолио веб-разработчика — проекты, контакты и вход/регистрация.">
     <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
     <title>Портфолио разработчика</title>
     <link rel="stylesheet" href="style.css">
@@ -30,15 +31,16 @@
             position: relative;
         }
 
+        /* subtle decorative background */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 1px, transparent 1px),
-                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.07) 1px, transparent 1px),
-                radial-gradient(circle at 50% 40%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 50% 40%, rgba(255,255,255,0.03) 1px, transparent 1px);
             pointer-events: none;
             z-index: -1;
             animation: twinkle 8s infinite alternate;
@@ -126,6 +128,7 @@
             animation: neon-pulse 3.5s infinite alternate;
             box-shadow: 0 0 20px #00ffcc;
             margin: 0 0 16px;
+            background: #000;
         }
 
         .neon-frame img,
@@ -135,7 +138,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
             background: #000;
         }
@@ -167,16 +170,14 @@
             color: white;
         }
 
+        /* auth styles */
         #auth-section {
             padding: 20px;
             width: 100%;
             background: rgba(25, 25, 45, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 12px;
-            border: 8px solid white;
-            box-shadow:
-                0 0 0 8px #ffff00,
-                0 0 15px #ffff00;
+            border: 4px solid rgba(255,255,255,0.06);
             margin: 0 0 40px;
             max-width: 100%;
         }
@@ -291,6 +292,15 @@
             padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
         }
 
+        /* small helper for screen-reader-only labels */
+        .sr-only {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0);
+            white-space: nowrap; border: 0;
+        }
+
         @media (max-width: 600px) {
             .main-content {
                 padding: 1.25rem 1rem;
@@ -311,17 +321,14 @@
                 font-size: 1.2rem;
             }
             #auth-section {
-                border-width: 6px;
-                box-shadow:
-                    0 0 0 6px #ffff00,
-                    0 0 12px #ffff00;
+                border-width: 3px;
             }
         }
     </style>
 </head>
 <body>
 
-    <nav>
+    <nav aria-label="Основная навигация">
         <ul>
             <li><a href="index.html">Главная</a></li>
             <li><a href="about.html">Обо мне</a></li>
@@ -331,36 +338,45 @@
         </ul>
     </nav>
 
-    <div class="main-content">
-        <div class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</div>
-        <div class="neon-frame">
-            <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe" alt="ФОТО">
-        </div>
-        <a href="portfolio.html" class="neon-btn">Смотреть проекты</a>
+    <main class="main-content">
+        <h1 class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</h1>
 
-        <section id="auth-section">
-            <div class="auth-title">Вход и регистрация</div>
-            <form id="loginForm">
-                <input type="email" id="loginEmail" placeholder="Email" required>
-                <input type="password" id="loginPassword" placeholder="Пароль" required>
+        <div class="neon-frame" aria-hidden="false">
+            <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe"
+                 alt="Портрет разработчика / превью проекта" loading="lazy">
+        </div>
+
+        <a href="portfolio.html" class="neon-btn" role="button">Смотреть проекты</a>
+
+        <section id="auth-section" aria-labelledby="auth-heading">
+            <h2 id="auth-heading" class="auth-title">Вход и регистрация</h2>
+
+            <form id="loginForm" novalidate>
+                <label class="sr-only" for="loginEmail">Email для входа</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required autocomplete="email">
+                <label class="sr-only" for="loginPassword">Пароль для входа</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Пароль" required autocomplete="current-password" minlength="6">
                 <button type="submit">Войти</button>
             </form>
-            <form id="registerForm">
-                <input type="email" id="registerEmail" placeholder="Email" required>
-                <input type="password" id="registerPassword" placeholder="Пароль (6+ символов)" required>
+
+            <form id="registerForm" novalidate>
+                <label class="sr-only" for="registerEmail">Email для регистрации</label>
+                <input type="email" id="registerEmail" name="email" placeholder="Email" required autocomplete="email">
+                <label class="sr-only" for="registerPassword">Пароль для регистрации</label>
+                <input type="password" id="registerPassword" name="password" placeholder="Пароль (6+ символов)" required autocomplete="new-password" minlength="6">
                 <button type="submit">Зарегистрироваться</button>
             </form>
 
             <div style="text-align: center; margin: 20px 0;">
-                <button id="googleLoginBtn" class="google-login-btn">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" alt="Google">
+                <button id="googleLoginBtn" class="google-login-btn" type="button" aria-label="Войти через Google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" height="20" alt="Google G">
                     Войти через Google
                 </button>
             </div>
 
-            <p id="authMessage"></p>
+            <p id="authMessage" aria-live="polite"></p>
         </section>
-    </div>
+    </main>
 
     <footer>
         <p>&copy; 2025. Все права защищены.</p>
@@ -389,7 +405,9 @@
         const auth = getAuth(app);
 
         function getErrorMessage(error) {
-            switch (error.code) {
+            // normalize error code
+            const code = error && error.code ? error.code : (typeof error === 'string' ? error : '');
+            switch (code) {
                 case 'auth/invalid-credential':
                 case 'auth/wrong-password':
                 case 'auth/user-not-found':
@@ -403,26 +421,35 @@
                 case 'auth/missing-password':
                     return 'Введите пароль!';
                 default:
-                    return 'Произошла ошибка. Попробуйте позже.';
+                    // if there's a message field, return it for debugging (fallback)
+                    return (error && error.message) ? error.message : 'Произошла ошибка. Попробуйте позже.';
             }
         }
 
-        function showMessage(text) {
+        function showMessage(text, type = 'info') {
             const el = document.getElementById('authMessage');
-            if (el) el.innerText = text;
+            if (el) {
+                el.innerText = text;
+                // additional simple styling by type could be added here if desired
+            }
         }
 
         document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail')?.value;
             const password = document.getElementById('loginPassword')?.value;
-            if (!email || !password) return;
+            if (!email || !password) {
+                showMessage('Пожалуйста, заполните все поля.');
+                return;
+            }
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Вход выполнен!');
-                window.location.href = 'dashboard.html';
+                // redirect after short delay to allow users to see the message
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
             } catch (error) {
+                console.error('Login error:', error);
                 showMessage(getErrorMessage(error));
             }
         });
@@ -431,13 +458,21 @@
             e.preventDefault();
             const email = document.getElementById('registerEmail')?.value;
             const password = document.getElementById('registerPassword')?.value;
-            if (!email || !password) return;
+            if (!email || !password) {
+                showMessage('Пожалуйста, заполните все поля.');
+                return;
+            }
+            if (password.length < 6) {
+                showMessage('Пароль должен быть не менее 6 символов.');
+                return;
+            }
 
             try {
                 await createUserWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Регистрация успешна!');
-                window.location.href = 'dashboard.html';
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
             } catch (error) {
+                console.error('Registration error:', error);
                 showMessage(getErrorMessage(error));
             }
         });
@@ -445,9 +480,9 @@
         document.getElementById('googleLoginBtn')?.addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             try {
-                const result = await signInWithPopup(auth, provider);
+                await signInWithPopup(auth, provider);
                 showMessage('✅ Вход через Google выполнен!');
-                window.location.href = 'dashboard.html';
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
             } catch (error) {
                 console.error("Ошибка Google входа:", error);
                 showMessage('❌ Ошибка входа через Google. Попробуйте позже.');
@@ -455,6 +490,6 @@
         });
     </script>
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
-</html>
+                        </html>
