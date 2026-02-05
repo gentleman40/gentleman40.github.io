@@ -132,68 +132,7 @@
             border-radius: 30px;
             font-weight: bold;
             border: 1px solid #007bff;
-            text-shadow: 0 0 6px rgba(0, 245, 255, 0.7);
-            transition: transform 0.2s;
-        }
-        .skill:hover {
-            transform: scale(1.05);
-            background: rgba(0, 245, 255, 0.15);
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px 0;
-            color: #aaa;
-            font-size: 0.95rem;
-            margin-top: 30px;
-            border-top: 1px solid rgba(0, 123, 255, 0.2);
-        }
-
-        /* Адаптация под мобильные */
-        @media (max-width: 600px) {
-            h2 { font-size: 2rem; }
-            .neon-frame { width: 180px; height: 180px; }
-            .about-content { padding: 0 15px; }
-            p { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Навигация (оставлена как есть, но теперь она гармонирует со стилем) -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-            gap: 5px;
-            max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section id="about">
-            <!-- Неоновая круглая рамка с фото -->
-            <div class="neon-frame">
-                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика">
+            text-                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика">
             </div>
 
             <div class="about-content">
@@ -227,9 +166,4 @@
     <script>
         document.getElementById('toggle-details').addEventListener('click', function() {
             const extra = document.getElementById('extra-details');
-            extra.classList.toggle('show');
-            this.textContent = extra.classList.contains('show') ? 'Скрыть' : 'Подробнее';
-        });
-    </script>
-</body>
-</html>
+            extra.classList
