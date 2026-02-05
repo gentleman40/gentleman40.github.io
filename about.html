@@ -14,7 +14,7 @@
             --muted: #e0e0ff;
         }
 
-        /* Общие настройки — без margin collapse и с контролем отступов */
+        /* Общие настройки */
         *, *::before, *::after {
             box-sizing: border-box;
         }
@@ -33,45 +33,6 @@
             -moz-osx-font-smoothing:grayscale;
         }
 
-        /* Навигация */
-        nav.site-nav {
-            background: #007bff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: var(--nav-height);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            border-bottom: 1px solid #0056b3;
-        }
-        nav.site-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 8px;
-            margin: 0;
-            padding: 0;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        nav.site-nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.92rem;
-            padding: 8px 12px;
-            border-radius: 6px;
-            display: inline-block;
-        }
-        nav.site-nav a:focus,
-        nav.site-nav a:hover {
-            background: rgba(255,255,255,0.12);
-            outline: none;
-        }
-
         /* Неоновый стиль заголовка */
         @keyframes neonGlow {
             0%, 100% { text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent), 0 0 15px var(--accent), 0 0 30px rgba(0,245,255,0.85); }
@@ -86,7 +47,7 @@
             letter-spacing: 1px;
         }
 
-        /* Контейнер для контента — строгие отступы */
+        /* Контейнер для контента */
         .about-content {
             padding: 0 20px;
             max-width: 900px;
@@ -105,7 +66,6 @@
             box-shadow: 0 0 12px rgba(0,245,255,0.9), 0 0 20px rgba(0,245,255,0.35);
             background: #0b0b0d;
         }
-        /* декоративная граница — слой под изображением, не перекрывает контент */
         .neon-frame::after {
             content: '';
             position: absolute;
@@ -135,7 +95,7 @@
             color: var(--muted);
         }
 
-        /* Кнопка "Подробнее" — неон + клик */
+        /* Кнопка "Подробнее" */
         .btn {
             display: block;
             margin: 25px auto;
@@ -169,7 +129,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Навыки — неоновые теги */
+        /* Навыки */
         .skills {
             margin-top: 30px;
             text-align: center;
@@ -217,13 +177,32 @@
 <body>
 
     <header>
-        <nav class="site-nav" aria-label="Основная навигация">
-            <ul>
-                <li><a href="index.html">Главная</a></li>
-                <li><a href="about.html" aria-current="page">Обо мне</a></li>
-                <li><a href="portfolio.html">Портфолио</a></li>
-                <li><a href="contact.html">Контакты</a></li>
-                <li><a href="calculator.html">Калькулятор</a></li>
+        <!-- НАВИГАЦИЯ ВОЗВРАЩЕНА В ИСХОДНОЕ ВИДЕ -->
+        <nav style="
+            background: #007bff;
+            padding: 12px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0056b3;
+        ">
+            <ul style="
+                list-style: none;
+                display: flex;
+                justify-content: space-around;
+                margin: 0;
+                padding: 0;
+                flex-wrap: wrap;
+                gap: 5px;
+                max-width: 100%;
+            ">
+                <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+                <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+                <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+                <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+                <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
             </ul>
         </nav>
     </header>
@@ -247,58 +226,4 @@
                 </button>
 
                 <div id="extra-details" class="hidden" role="region" aria-hidden="true" aria-labelledby="about-title">
-                    <p>Я люблю создавать красивые и функциональные интерфейсы, которые радуют пользователей. Мои проекты — это сочетание эстетики и логики.</p>
-                    <p>В свободное время участвую в open-source проектах, изучаю новые фреймворки и пишу статьи в блог.</p>
-                </div>
-
-                <div class="skills" aria-label="Навыки">
-                    <h3>Мои навыки:</h3>
-                    <span class="skill" role="listitem">JavaScript</span>
-                    <span class="skill" role="listitem">React</span>
-                    <span class="skill" role="listitem">CSS</span>
-                    <span class="skill" role="listitem">Git</span>
-                    <span class="skill" role="listitem">UI/UX</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <p>&copy; 2025. Все права защищены.</p>
-    </footer>
-
-    <script defer>
-        (function () {
-            const btn = document.getElementById('toggle-details');
-            const extra = document.getElementById('extra-details');
-
-            if (!btn || !extra) return;
-
-            // синхронизируем начальное состояние aria
-            btn.setAttribute('aria-expanded', 'false');
-            extra.setAttribute('aria-hidden', 'true');
-
-            btn.addEventListener('click', function () {
-                const isOpen = extra.classList.toggle('show');
-                // переключаем визуальное состояние (display managed via CSS classes)
-                if (isOpen) {
-                    extra.classList.remove('hidden');
-                    btn.textContent = 'Скрыть';
-                    btn.setAttribute('aria-expanded', 'true');
-                    extra.setAttribute('aria-hidden', 'false');
-                } else {
-                    extra.classList.remove('show');
-                    // добавляем небольшую задержку, чтобы анимация успела проиграться, затем скрываем
-                    setTimeout(() => extra.classList.add('hidden'), 360);
-                    btn.textContent = 'Подробнее';
-                    btn.setAttribute('aria-expanded', 'false');
-                    extra.setAttribute('aria-hidden', 'true');
-                }
-            });
-
-            // улучшение: открытие/закрытие по клавишам Enter/Space уже поддерживается для button
-            // но можно добавить фокус-стайл при навигации с клавиатуры (через CSS :focus)
-        })();
-    </script>
-</body>
-</html>
+                    <p>Я люблю создавать красивые и функциональные интерфей*
