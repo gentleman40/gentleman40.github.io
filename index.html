@@ -253,155 +253,41 @@
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
+            color: #ff5555;
+            text-shadow: 0 0 8px #ff5555;
             min-height: 1.2em;
-            padding: 10px;
-            border-radius: 6px;
-            animation: message-fade 0.3s ease;
         }
 
-        @keyframes message-fade {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message-success {
-            background: rgba(40, 167, 69, 0.2);
-            color: #28a745;
-            border: 1px solid #28a745;
-        }
-
-        .message-error {
-            background: rgba(220, 53, 69, 0.2);
-            color: #dc3545;
-            border: 1px solid #dc3545;
-        }
-
-        .message-info {
-            background: rgba(255, 193, 7, 0.2);
-            color: #ffc107;
-            border: 1px solid #ffc107;
-        }
-
-        /* Красивая кнопка Google Login - УЛУЧШЕНАЯ */
+        /* Красивая кнопка Google — минималистичная и рабочая */
         .google-login-btn {
-            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            background: white;
             color: #333 !important;
-            border: 2px solid #dadce0;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            max-width: 320px;
+            max-width: 280px;
             margin: 20px auto;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
         }
-
-        .google-login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-            transition: left 0.5s;
-        }
-
-        .google-login-btn:hover::before {
-            left: 100%;
-        }
-
         .google-login-btn:hover {
-            background: linear-gradient(to right, #f8f9fa, #e9ecef);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            border-color: #bdbdbd;
+            background: #f8f8f8;
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
         }
-
         .google-login-btn:active {
             transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         }
-
         .google-login-btn img {
-            width: 24px;
-            height: 24px;
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
-        }
-
-        .google-login-btn span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Состояние авторизованного пользователя */
-        .user-info {
-            background: rgba(40, 167, 69, 0.15);
-            border: 2px solid #28a745;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #28a745;
-            margin: 0 auto 10px;
-            display: block;
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
-        }
-
-        .user-name {
-            font-weight: bold;
-            color: #28a745;
-            font-size: 1.1rem;
-            margin: 5px 0;
-        }
-
-        .user-email {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin: 3px 0;
-        }
-
-        .logout-btn {
-            background: linear-gradient(to right, #dc3545, #c82333);
-            color: white !important;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            max-width: 200px;
-            margin: 15px auto 0;
-            display: block;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
-        }
-
-        .logout-btn:hover {
-            background: linear-gradient(to right, #c82333, #bd2130);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.5);
+            width: 20px;
+            height: 20px;
         }
 
         footer {
@@ -447,14 +333,6 @@
             #auth-section {
                 border-width: 3px;
             }
-            .google-login-btn {
-                max-width: 100%;
-                padding: 10px 20px;
-            }
-            .google-login-btn img {
-                width: 20px;
-                height: 20px;
-            }
         }
     </style>
 </head>
@@ -483,50 +361,30 @@
         <section id="auth-section" aria-labelledby="auth-heading">
             <h2 id="auth-heading" class="auth-title">Вход и регистрация</h2>
 
-            <!-- Блок информации о пользователе (показывается после входа) -->
-            <div id="userInfoContainer" style="display: none;">
-                <div class="user-info">
-                    <img id="userAvatar" src="" alt="Аватар" class="user-avatar" style="display: none;">
-                    <div class="user-name" id="userName"></div>
-                    <div class="user-email" id="userEmail"></div>
-                    <button id="logoutBtn" class="logout-btn">Выйти</button>
-                </div>
+            <form id="loginForm" novalidate>
+                <label class="sr-only" for="loginEmail">Email для входа</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required autocomplete="email">
+                <label class="sr-only" for="loginPassword">Пароль для входа</label>
+                <input type="password" id="loginPassword" name="password" placeholder="Пароль" required autocomplete="current-password" minlength="6">
+                <button type="submit">Войти</button>
+            </form>
+
+            <form id="registerForm" novalidate>
+                <label class="sr-only" for="registerEmail">Email для регистрации</label>
+                <input type="email" id="registerEmail" name="email" placeholder="Email" required autocomplete="email">
+                <label class="sr-only" for="registerPassword">Пароль для регистрации</label>
+                <input type="password" id="registerPassword" name="password" placeholder="Пароль (6+ символов)" required autocomplete="new-password" minlength="6">
+                <button type="submit">Зарегистрироваться</button>
+            </form>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button id="googleLoginBtn" class="google-login-btn" type="button" aria-label="Войти через Google">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" height="20" alt="Google G">
+                    Войти через Google
+                </button>
             </div>
 
-            <!-- Формы входа и регистрации -->
-            <div id="authForms">
-                <form id="loginForm" novalidate>
-                    <label class="sr-only" for="loginEmail">Email для входа</label>
-                    <input type="email" id="loginEmail" name="email" placeholder="Email" required autocomplete="email">
-                    <label class="sr-only" for="loginPassword">Пароль для входа</label>
-                    <input type="password" id="loginPassword" name="password" placeholder="Пароль" required autocomplete="current-password" minlength="6">
-                    <button type="submit">Войти</button>
-                </form>
-
-                <form id="registerForm" novalidate>
-                    <label class="sr-only" for="registerEmail">Email для регистрации</label>
-                    <input type="email" id="registerEmail" name="email" placeholder="Email" required autocomplete="email">
-                    <label class="sr-only" for="registerPassword">Пароль для регистрации</label>
-                    <input type="password" id="registerPassword" name="password" placeholder="Пароль (6+ символов)" required autocomplete="new-password" minlength="6">
-                    <button type="submit">Зарегистрироваться</button>
-                </form>
-
-                <div style="text-align: center; margin: 25px 0; position: relative;">
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
-                        <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
-                        <span style="color: #888; font-size: 0.9rem; white-space: nowrap;">или войдите через</span>
-                        <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
-                    </div>
-                    <button id="googleLoginBtn" class="google-login-btn" type="button" aria-label="Войти через Google">
-                        <span>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="24" height="24" alt="Google G">
-                            <span>Войти через Google</span>
-                        </span>
-                    </button>
-                </div>
-
-                <p id="authMessage" aria-live="polite"></p>
-            </div>
+            <p id="authMessage" aria-live="polite"></p>
         </section>
     </main>
 
@@ -535,15 +393,14 @@
     </footer>
 
     <script type="module">
+        // Исправленные импорты БЕЗ пробелов в конце путей
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import {
             getAuth,
             signInWithEmailAndPassword,
             createUserWithEmailAndPassword,
             GoogleAuthProvider,
-            signInWithPopup,
-            signOut,
-            onAuthStateChanged
+            signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         const firebaseConfig = {
@@ -558,14 +415,13 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Функция для получения сообщений об ошибках
         function getErrorMessage(error) {
             const code = error?.code || '';
             switch (code) {
                 case 'auth/invalid-credential':
                 case 'auth/wrong-password':
                 case 'auth/user-not-found':
-                    return 'Неверный логин или пароль!';
+                    return 'ОШИБКА! НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ!';
                 case 'auth/email-already-in-use':
                     return 'Этот email уже используется!';
                 case 'auth/invalid-email':
@@ -573,173 +429,74 @@
                 case 'auth/weak-password':
                     return 'Пароль слишком слабый! Минимум 6 символов.';
                 case 'auth/popup-closed-by-user':
-                    return 'Вы закрыли окно авторизации.';
-                case 'auth/popup-blocked':
-                    return 'Всплывающее окно заблокировано. Разрешите всплывающие окна для этого сайта.';
-                case 'auth/network-request-failed':
-                    return 'Ошибка сети. Проверьте подключение к интернету.';
-                case 'auth/too-many-requests':
-                    return 'Слишком много попыток. Попробуйте позже.';
+                    return 'Вы закрыли окно входа.';
                 default:
-                    return error?.message || 'Произошла ошибка. Попробуйте позже.';
+                    return 'Произошла ошибка. Попробуйте позже.';
             }
         }
 
-        // Показ сообщений
-        function showMessage(text, type = 'info') {
+        function showMessage(text) {
             const el = document.getElementById('authMessage');
-            if (el) {
-                el.textContent = text;
-                el.className = ''; // Очищаем предыдущие классы
-                el.classList.add('message-' + type);
-                
-                // Автоочистка через 5 секунд
-                setTimeout(() => {
-                    if (el.textContent === text) {
-                        el.textContent = '';
-                        el.className = '';
-                    }
-                }, 5000);
-            }
+            if (el) el.innerText = text;
         }
 
-        // Отображение информации о пользователе
-        function showUserInfo(user) {
-            const userInfoContainer = document.getElementById('userInfoContainer');
-            const authForms = document.getElementById('authForms');
-            const userName = document.getElementById('userName');
-            const userEmail = document.getElementById('userEmail');
-            const userAvatar = document.getElementById('userAvatar');
-
-            if (user) {
-                // Показываем информацию о пользователе
-                userInfoContainer.style.display = 'block';
-                authForms.style.display = 'none';
-
-                // Заполняем данные
-                userName.textContent = user.displayName || user.email.split('@')[0];
-                userEmail.textContent = user.email;
-
-                // Показываем аватар, если есть
-                if (user.photoURL) {
-                    userAvatar.src = user.photoURL;
-                    userAvatar.style.display = 'block';
-                } else {
-                    userAvatar.style.display = 'none';
-                }
-            } else {
-                // Скрываем информацию о пользователе
-                userInfoContainer.style.display = 'none';
-                authForms.style.display = 'block';
-            }
-        }
-
-        // Вход по email и паролю
+        // Вход по email/паролю — без перенаправления
         document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail')?.value.trim();
             const password = document.getElementById('loginPassword')?.value;
-
+            
             if (!email || !password) {
-                showMessage('⚠️ Заполните все поля!', 'info');
+                showMessage('Заполните все поля');
                 return;
             }
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                showMessage('✅ Вход выполнен успешно!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 800);
+                showMessage('✅ Вход выполнен!');
             } catch (error) {
-                console.error('Ошибка входа:', error);
-                showMessage('❌ ' + getErrorMessage(error), 'error');
+                console.error('Login error:', error);
+                showMessage('❌ ' + getErrorMessage(error));
             }
         });
 
-        // Регистрация
+        // Регистрация — без перенаправления
         document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('registerEmail')?.value.trim();
             const password = document.getElementById('registerPassword')?.value;
-
+            
             if (!email || !password) {
-                showMessage('⚠️ Заполните все поля!', 'info');
-                return;
-            }
-
-            if (password.length < 6) {
-                showMessage('🔒 Пароль должен быть не менее 6 символов.', 'info');
+                showMessage('Заполните все поля');
                 return;
             }
 
             try {
                 await createUserWithEmailAndPassword(auth, email, password);
-                showMessage('✅ Регистрация успешна! Добро пожаловать!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 800);
+                showMessage('✅ Регистрация успешна!');
             } catch (error) {
-                console.error('Ошибка регистрации:', error);
-                showMessage('❌ ' + getErrorMessage(error), 'error');
+                console.error('Registration error:', error);
+                showMessage('❌ ' + getErrorMessage(error));
             }
         });
 
-        // Вход через Google
+        // Google авторизация — ИСПРАВЛЕНА
         document.getElementById('googleLoginBtn')?.addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             
-            // Запрашиваем email и профиль
-            provider.addScope('profile');
-            provider.addScope('email');
-
             try {
-                showMessage('⏳ Авторизация через Google...', 'info');
-                const result = await signInWithPopup(auth, provider);
-                
-                const user = result.user;
-                console.log('Успешный вход через Google:', {
-                    email: user.email,
-                    name: user.displayName,
-                    photo: user.photoURL
-                });
-
-                showMessage('✅ Вход через Google выполнен!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 800);
+                showMessage('⏳ Авторизация через Google...');
+                await signInWithPopup(auth, provider);
+                showMessage('✅ Вход через Google выполнен!');
             } catch (error) {
-                console.error('Ошибка входа через Google:', error);
+                console.error('Google login error:', error);
                 
-                // Не показываем сообщение, если пользователь закрыл окно
+                // Не показываем ошибку, если пользователь сам закрыл окно
                 if (error.code !== 'auth/popup-closed-by-user') {
-                    showMessage('❌ ' + getErrorMessage(error), 'error');
+                    showMessage('❌ ' + getErrorMessage(error));
+                } else {
+                    document.getElementById('authMessage').innerText = '';
                 }
-            }
-        });
-
-        // Выход из системы
-        document.getElementById('logoutBtn')?.addEventListener('click', async () => {
-            try {
-                await signOut(auth);
-                showMessage('👋 Вы успешно вышли из системы!', 'info');
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
-            } catch (error) {
-                console.error('Ошибка выхода:', error);
-                showMessage('❌ Не удалось выйти из системы', 'error');
-            }
-        });
-
-        // Отслеживание состояния авторизации
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log('Пользователь авторизован:', user.email);
-                showUserInfo(user);
-            } else {
-                console.log('Пользователь не авторизован');
-                showUserInfo(null);
             }
         });
     </script>
