@@ -3,55 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Обо мне — фронтенд-разработчик. Проекты, навыки и контактная информация.">
     <title>Обо мне</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --nav-height: 64px;
-            --bg: #0f0f15;
-            --accent: #00f5ff;
-            --muted: #e0e0ff;
-        }
-
-        /* Общие настройки */
-        *, *::before, *::after {
+        /* Общие настройки — без margin collapse и с контролем отступов */
+        * {
             box-sizing: border-box;
-        }
-        html, body {
-            height: 100%;
         }
         body {
             margin: 0;
-            padding-top: var(--nav-height); /* высота фиксированной навигации */
-            background: var(--bg);
+            padding-top: 70px; /* Высота фиксированной навигации */
+            background: #0f0f15;
             color: #f0f0f0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
         }
 
         /* Неоновый стиль заголовка */
         @keyframes neonGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent), 0 0 15px var(--accent), 0 0 30px rgba(0,245,255,0.85); }
-            50% { text-shadow: 0 0 3px var(--accent), 0 0 8px var(--accent), 0 0 12px var(--accent), 0 0 20px rgba(0,245,255,0.6); }
+            0%, 100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 30px #00f5ff; }
+            50% { text-shadow: 0 0 3px #0ff, 0 0 8px #0ff, 0 0 12px #0ff, 0 0 25px #00f5ff; }
         }
-        h2.page-title {
+        h2 {
             font-size: 2.4rem;
             text-align: center;
             margin: 30px 0 25px;
             color: #fff;
-            animation: neonGlow 2.2s infinite alternate;
+            animation: neonGlow 2s infinite alternate;
             letter-spacing: 1px;
         }
 
-        /* Контейнер для контента */
+        /* Контейнер для контента — строгие отступы */
         .about-content {
             padding: 0 20px;
-            max-width: 900px;
-            margin: 0 auto 40px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         /* Фото в неоновой рамке */
@@ -63,57 +50,54 @@
             border-radius: 50%;
             overflow: hidden;
             position: relative;
-            box-shadow: 0 0 12px rgba(0,245,255,0.9), 0 0 20px rgba(0,245,255,0.35);
-            background: #0b0b0d;
+            box-shadow: 0 0 12px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.5);
+            border: 3px solid transparent;
         }
-        .neon-frame::after {
+        .neon-frame::before {
             content: '';
             position: absolute;
-            inset: -6px;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
             border-radius: 50%;
             background: linear-gradient(45deg, #00f5ff, #00ff9d, #00f5ff);
-            filter: blur(6px);
-            z-index: 0;
-            opacity: 0.85;
-            pointer-events: none;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         .neon-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            display: block;
-            position: relative;
-            z-index: 1;
             background: #111;
         }
 
         p {
-            font-size: 1.06rem;
+            font-size: 1.1rem;
             margin: 16px 0;
             text-align: center;
-            color: var(--muted);
+            color: #e0e0ff;
         }
 
-        /* Кнопка "Подробнее" */
+        /* Кнопка "Подробнее" — неон + клик */
         .btn {
             display: block;
             margin: 25px auto;
             padding: 12px 30px;
             background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            color: #00f5ff;
+            border: 2px solid #00f5ff;
             border-radius: 30px;
-            font-size: 1.05rem;
-            font-weight: 700;
+            font-size: 1.1rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.22s ease;
+            transition: all 0.3s ease;
         }
-        .btn:hover,
-        .btn:focus {
-            background: rgba(0, 245, 255, 0.08);
-            box-shadow: 0 0 15px rgba(0,245,255,0.25);
-            outline: none;
+        .btn:hover {
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: 0 0 15px #00f5ff;
         }
 
         /* Скрытие/показ дополнительного текста */
@@ -122,53 +106,54 @@
         }
         .show {
             display: block;
-            animation: fadeIn 0.36s ease;
+            animation: fadeIn 0.6s ease;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Навыки */
+        /* Навыки — неоновые теги */
         .skills {
             margin-top: 30px;
             text-align: center;
         }
         .skills h3 {
             margin-bottom: 15px;
-            color: var(--accent);
-            font-size: 1.25rem;
+            color: #00f5ff;
+            font-size: 1.4rem;
         }
         .skill {
             display: inline-block;
-            background: rgba(0, 123, 255, 0.08);
-            color: var(--accent);
-            padding: 8px 18px;
+            background: rgba(0, 123, 255, 0.2);
+
+color: #00f5ff;
+            padding: 8px 20px;
             margin: 6px;
             border-radius: 30px;
-            font-weight: 700;
-            border: 1px solid rgba(0,123,255,0.25);
-            text-shadow: 0 0 6px rgba(0,245,255,0.25);
-            transition: transform 0.14s ease;
+            font-weight: bold;
+            border: 1px solid #007bff;
+            text-shadow: 0 0 6px rgba(0, 245, 255, 0.7);
+            transition: transform 0.2s;
         }
         .skill:hover {
-            transform: translateY(-2px) scale(1.03);
-            background: rgba(0, 245, 255, 0.06);
+            transform: scale(1.05);
+            background: rgba(0, 245, 255, 0.15);
         }
 
-        footer.site-footer {
+        footer {
             text-align: center;
             padding: 25px 0;
             color: #aaa;
             font-size: 0.95rem;
             margin-top: 30px;
-            border-top: 1px solid rgba(0, 123, 255, 0.08);
+            border-top: 1px solid rgba(0, 123, 255, 0.2);
         }
 
         /* Адаптация под мобильные */
         @media (max-width: 600px) {
-            h2.page-title { font-size: 2rem; margin-top: 18px; }
-            .neon-frame { width: 180px; height: 180px; margin-top: 18px; }
+            h2 { font-size: 2rem; }
+            .neon-frame { width: 180px; height: 180px; }
             .about-content { padding: 0 15px; }
             p { font-size: 1rem; }
         }
@@ -176,54 +161,76 @@
 </head>
 <body>
 
-    <header>
-        <!-- НАВИГАЦИЯ ВОЗВРАЩЕНА В ИСХОДНОЕ ВИДЕ -->
-        <nav style="
-            background: #007bff;
-            padding: 12px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            border-bottom: 1px solid #0056b3;
+    <!-- Навигация (оставлена как есть, но теперь она гармонирует со стилем) -->
+    <nav style="
+        background: #007bff;
+        padding: 12px 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        border-bottom: 1px solid #0056b3;
+    ">
+        <ul style="
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            gap: 5px;
+            max-width: 100%;
         ">
-            <ul style="
-                list-style: none;
-                display: flex;
-                justify-content: space-around;
-                margin: 0;
-                padding: 0;
-                flex-wrap: wrap;
-                gap: 5px;
-                max-width: 100%;
-            ">
-                <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-                <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-                <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-                <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-                <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
-            </ul>
-        </nav>
-    </header>
+            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
+            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
+            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
+            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
+            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+        </ul>
+    </nav>
 
     <main>
-        <section id="about" class="about-section" aria-labelledby="about-title">
+        <section id="about">
             <!-- Неоновая круглая рамка с фото -->
-            <div class="neon-frame" aria-hidden="true">
-                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15"
-                     alt="Портрет разработчика" loading="lazy">
+            <div class="neon-frame">
+                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика">
             </div>
 
             <div class="about-content">
-                <h2 id="about-title" class="page-title">Обо мне</h2>
+                <h2>Обо мне</h2>
 
                 <p>Я фронтенд-разработчик с опытом создания интерактивных веб-сайтов. Использую современные технологии: HTML5, CSS3, JavaScript (ES6+).</p>
 
-                <button id="toggle-details" class="btn" type="button"
-                        aria-expanded="false" aria-controls="extra-details">
-                    Подробнее
-                </button>
+                <button id="toggle-details" class="btn">Подробнее</button>
 
-                <div id="extra-details" class="hidden" role="region" aria-hidden="true" aria-labelledby="about-title">
-                    <p>Я люблю создавать красивые и функциональные интерфей*
+                <div id="extra-details" class="hidden">
+                    <p>Я люблю создавать красивые и функциональные интерфейсы, которые радуют пользователей. Мои проекты — это сочетание эстетики и логики.</p>
+                    <p>В свободное время участвую в open-source проектах, изучаю новые фреймворки и пишу статьи в блог.</p>
+                </div>
+
+                <div class="skills">
+                    <h3>Мои навыки:</h3>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">React</span>
+                    <span class="skill">CSS</span>
+                    <span class="skill">Git</span>
+                    <span class="skill">UI/UX</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
+
+<script>
+        document.getElementById('toggle-details').addEventListener('click', function() {
+            const extra = document.getElementById('extra-details');
+            extra.classList.toggle('show');
+            this.textContent = extra.classList.contains('show') ? 'Скрыть' : 'Подробнее';
+        });
+    </script>
+</body>
+</html>
