@@ -2,191 +2,444 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Обо мне</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Обо мне — фронтенд-разработчик с опытом создания интерактивных веб-сайтов">
+    <title>Обо мне | Портфолио</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Общие настройки — без margin collapse и с контролем отступов */
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
         }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            padding-top: 70px; /* Высота фиксированной навигации */
-            background: #0f0f15;
-            color: #f0f0f0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
             overflow-x: hidden;
-        }
-
-        /* Неоновый стиль заголовка */
-        @keyframes neonGlow {
-            0%, 100% { text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 30px #00f5ff; }
-            50% { text-shadow: 0 0 3px #0ff, 0 0 8px #0ff, 0 0 12px #0ff, 0 0 25px #00f5ff; }
-        }
-        h2 {
-            font-size: 2.4rem;
-            text-align: center;
-            margin: 30px 0 25px;
-            color: #fff;
-            animation: neonGlow 2s infinite alternate;
-            letter-spacing: 1px;
-        }
-
-        /* Контейнер для контента — строгие отступы */
-        .about-content {
-            padding: 0 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Фото в неоновой рамке */
-        .neon-frame {
-            display: block;
-            margin: 25px auto 30px;
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            overflow: hidden;
             position: relative;
-            box-shadow: 0 0 12px #00f5ff, 0 0 20px rgba(0, 245, 255, 0.5);
-            border: 3px solid transparent;
+            padding-top: 58px; /* Высота навигации */
         }
-        .neon-frame::before {
-            content: '';
-            position: absolute;
-            top: -4px; left: -4px; right: -4px; bottom: -4px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #00f5ff, #00ff9d, #00f5ff);
+
+        /* Мерцающий декоративный фон */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                radial-gradient(circle at 85% 75%, rgba(255,255,255,0.06) 1px, transparent 1px),
+                radial-gradient(circle at 45% 55%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 60% 30%, rgba(0,245,255,0.05) 1px, transparent 1px);
+            pointer-events: none;
             z-index: -1;
-            animation: rotate 3s linear infinite;
+            animation: twinkle 10s infinite alternate;
         }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
-        .neon-frame img {
+
+        nav {
+            background: #007bff;
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            background: #111;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0056b3;
         }
 
-        p {
-            font-size: 1.1rem;
-            margin: 16px 0;
-            text-align: center;
-            color: #e0e0ff;
-        }
-
-        /* Кнопка "Подробнее" — неон + клик */
-        .btn {
-            display: block;
-            margin: 25px auto;
-            padding: 12px 30px;
-            background: transparent;
-            color: #00f5ff;
-            border: 2px solid #00f5ff;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background: rgba(0, 245, 255, 0.1);
-            box-shadow: 0 0 15px #00f5ff;
-        }
-
-        /* Скрытие/показ дополнительного текста */
-        .hidden {
-            display: none;
-        }
-        .show {
-            display: block;
-            animation: fadeIn 0.6s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Навыки — неоновые теги */
-        .skills {
-            margin-top: 30px;
-            text-align: center;
-        }
-        .skills h3 {
-            margin-bottom: 15px;
-            color: #00f5ff;
-            font-size: 1.4rem;
-        }
-        .skill {
-            display: inline-block;
-            background: rgba(0, 123, 255, 0.2);
-
-color: #00f5ff;
-            padding: 8px 20px;
-            margin: 6px;
-            border-radius: 30px;
-            font-weight: bold;
-            border: 1px solid #007bff;
-            text-shadow: 0 0 6px rgba(0, 245, 255, 0.7);
-            transition: transform 0.2s;
-        }
-        .skill:hover {
-            transform: scale(1.05);
-            background: rgba(0, 245, 255, 0.15);
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px 0;
-            color: #aaa;
-            font-size: 0.95rem;
-            margin-top: 30px;
-            border-top: 1px solid rgba(0, 123, 255, 0.2);
-        }
-
-        /* Адаптация под мобильные */
-        @media (max-width: 600px) {
-            h2 { font-size: 2rem; }
-            .neon-frame { width: 180px; height: 180px; }
-            .about-content { padding: 0 15px; }
-            p { font-size: 1rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Навигация (оставлена как есть, но теперь она гармонирует со стилем) -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
+        nav ul {
             list-style: none;
             display: flex;
             justify-content: space-around;
             margin: 0;
             padding: 0;
             flex-wrap: wrap;
-            gap: 5px;
-            max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+            gap: 0.3rem;
+            max-width: 100vw;
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.92rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        nav li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        nav li a.active {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Неоновый заголовок */
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 30px 0 40px;
+            color: #fff;
+            letter-spacing: 3px;
+            position: relative;
+            animation: neon-glow-title 3s infinite alternate;
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        @keyframes neon-glow-title {
+            0% { color: #00ffcc; text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+            25% { color: #00ccff; text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff; }
+            50% { color: #ffff00; text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
+            75% { color: #ff5500; text-shadow: 0 0 10px #ff5500, 0 0 20px #ff5500; }
+            100% { color: #33ff99; text-shadow: 0 0 10px #33ff99, 0 0 20px #33ff99; }
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Контент страницы */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Фото в неоновой круглой рамке */
+        .neon-frame {
+            display: block;
+            margin: 30px auto 40px;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 15px #00ffcc, 0 0 30px rgba(0, 255, 204, 0.5);
+            border: 4px solid transparent;
+        }
+
+        .neon-frame::before {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffcc, #00ccff, #ffff00, #ff5500, #33ff99);
+            z-index: -1;
+            animation: rotate-border 6s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .neon-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background: #111;
+            transition: transform 0.5s ease;
+        }
+
+        .neon-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Текст с неоновым эффектом */
+        .about-text {
+            background: rgba(20, 20, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(0, 255, 204, 0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin: 15px 0;
+            color: #e0e0ff;
+            line-height: 1.8;
+        }
+
+        /* Кнопка "Подробнее" с неоновым эффектом */
+        .btn {
+            display: block;
+            margin: 30px auto;
+            padding: 14px 35px;
+            background: transparent;
+            color: #00ffcc;
+            border: 2px solid #00ffcc;
+            border-radius: 30px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 10px #00ffcc;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,204,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 20px #00ffcc, 0 0 35px #00ffcc;
+            transform: translateY(-3px);
+        }
+
+        /* Скрытие/показ дополнительного текста */
+        .hidden {
+            display: none;
+            animation: slideDown 0.6s ease;
+        }
+
+        .show {
+            display: block;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Навыки — неоновые теги */
+        .skills {
+            margin-top: 40px;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 2px solid rgba(0, 255, 204, 0.2);
+        }
+
+        .skills h3 {
+            margin-bottom: 25px;
+            color: #00ffcc;
+            font-size: 1.6rem;
+            animation: skill-title-glow 2s infinite alternate;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        @keyframes skill-title-glow {
+            0% { text-shadow: 0 0 8px #00ffcc; }
+            100% { text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc; }
+        }
+
+        .skill-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .skill {
+            display: inline-block;
+            background: rgba(0, 123, 255, 0.2);
+            color: #00ffcc;
+            padding: 10px 22px;
+            margin: 6px;
+            border-radius: 30px;
+            font-weight: bold;
+            border: 1px solid #007bff;
+            text-shadow: 0 0 6px rgba(0, 255, 204, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,204,0.15), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill:hover::before {
+            left: 100%;
+        }
+
+        .skill:hover {
+            transform: scale(1.1) translateY(-3px);
+            background: rgba(0, 255, 204, 0.15);
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+        }
+
+        footer {
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.8rem;
+                margin: 20px 0 30px;
+            }
+
+            .neon-frame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .about-text {
+                padding: 25px 20px;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+                margin: 25px auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 65px;
+            }
+
+            nav ul {
+                gap: 2px;
+                flex-wrap: wrap;
+            }
+
+            nav li a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin: 15px 0 25px;
+            }
+
+            .neon-frame {
+                width: 180px;
+                height: 180px;
+                margin: 25px auto 30px;
+            }
+
+            .about-text {
+                padding: 20px 15px;
+            }
+
+            .about-text p {
+                font-size: 0.95rem;
+                margin: 12px 0;
+            }
+
+            .btn {
+                width: 90%;
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .skill {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav aria-label="Основная навигация">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html" class="active">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
         </ul>
     </nav>
 
@@ -194,28 +447,44 @@ color: #00f5ff;
         <section id="about">
             <!-- Неоновая круглая рамка с фото -->
             <div class="neon-frame">
-                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика">
+                <img src="https://github.com/user-attachments/assets/61e33cca-89df-4927-ba9a-8242be2f2c15" alt="Фото разработчика" loading="lazy">
             </div>
 
             <div class="about-content">
-                <h2>Обо мне</h2>
+                <h2>↓ ОБО МНЕ ↓</h2>
 
-                <p>Я фронтенд-разработчик с опытом создания интерактивных веб-сайтов. Использую современные технологии: HTML5, CSS3, JavaScript (ES6+).</p>
+                <div class="about-text">
+                    <p>👋 Привет! Я <strong>фронтенд-разработчик</strong> с опытом создания интерактивных веб-сайтов и приложений. Специализируюсь на современных технологиях: <strong>HTML5, CSS3, JavaScript (ES6+)</strong>.</p>
+                    
+                    <p>💡 Мои проекты — это сочетание <strong>эстетики и функциональности</strong>. Я создаю интерфейсы, которые не только красиво выглядят, но и доставляют удовольствие при использовании.</p>
+                </div>
 
                 <button id="toggle-details" class="btn">Подробнее</button>
 
                 <div id="extra-details" class="hidden">
-                    <p>Я люблю создавать красивые и функциональные интерфейсы, которые радуют пользователей. Мои проекты — это сочетание эстетики и логики.</p>
-                    <p>В свободное время участвую в open-source проектах, изучаю новые фреймворки и пишу статьи в блог.</p>
+                    <div class="about-text">
+                        <p>🚀 Я люблю создавать красивые и функциональные интерфейсы, которые радуют пользователей. Каждый проект — это возможность применить новые технологии и решить интересные задачи.</p>
+                        
+                        <p>🔧 В свободное время участвую в <strong>open-source</strong> проектах, изучаю новые фреймворки и технологии, а также пишу статьи в блог о веб-разработке.</p>
+                        
+                        <p>🎯 Моя цель — создавать продукты, которые делают жизнь пользователей проще и приятнее. Всегда открыт к новым проектам и сотрудничеству!</p>
+                    </div>
                 </div>
 
                 <div class="skills">
-                    <h3>Мои навыки:</h3>
-                    <span class="skill">JavaScript</span>
-                    <span class="skill">React</span>
-                    <span class="skill">CSS</span>
-                    <span class="skill">Git</span>
-                    <span class="skill">UI/UX</span>
+                    <h3>МОИ НАВЫКИ</h3>
+                    <div class="skill-container">
+                        <span class="skill">JavaScript</span>
+                        <span class="skill">React</span>
+                        <span class="skill">HTML5</span>
+                        <span class="skill">CSS3</span>
+                        <span class="skill">Git</span>
+                        <span class="skill">Firebase</span>
+                        <span class="skill">UI/UX</span>
+                        <span class="skill">Responsive Design</span>
+                        <span class="skill">ES6+</span>
+                        <span class="skill">Web Animations</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -225,7 +494,7 @@ color: #00f5ff;
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-<script>
+    <script>
         document.getElementById('toggle-details').addEventListener('click', function() {
             const extra = document.getElementById('extra-details');
             extra.classList.toggle('show');
