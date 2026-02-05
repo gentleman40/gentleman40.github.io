@@ -258,36 +258,56 @@
             min-height: 1.2em;
         }
 
-        /* Красивая кнопка Google — минималистичная и рабочая */
+        /* КРАСИВАЯ КНОПКА GOOGLE - УЛУЧШЕНАЯ */
         .google-login-btn {
-            background: white;
-            color: #333 !important;
+            background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
+            color: white !important;
             border: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-weight: bold;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            max-width: 280px;
-            margin: 20px auto;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            transition: all 0.2s ease;
+            max-width: 320px;
+            margin: 25px auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
+
+        .google-login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .google-login-btn:hover::before {
+            left: 100%;
+        }
+
         .google-login-btn:hover {
-            background: #f8f8f8;
-            transform: translateY(-1px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
         }
+
         .google-login-btn:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
+
         .google-login-btn img {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
         footer {
@@ -333,6 +353,15 @@
             #auth-section {
                 border-width: 3px;
             }
+            .google-login-btn {
+                max-width: 100%;
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+            .google-login-btn img {
+                width: 20px;
+                height: 20px;
+            }
         }
     </style>
 </head>
@@ -377,10 +406,15 @@
                 <button type="submit">Зарегистрироваться</button>
             </form>
 
-            <div style="text-align: center; margin: 20px 0;">
+            <div style="text-align: center; margin: 25px 0; position: relative;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
+                    <span style="color: #888; font-size: 0.9rem; white-space: nowrap;">или</span>
+                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
+                </div>
                 <button id="googleLoginBtn" class="google-login-btn" type="button" aria-label="Войти через Google">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" height="20" alt="Google G">
-                    Войти через Google
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="24" height="24" alt="Google G">
+                    <span>Войти через Google</span>
                 </button>
             </div>
 
@@ -393,7 +427,7 @@
     </footer>
 
     <script type="module">
-        // Исправленные импорты БЕЗ пробелов в конце путей
+        // ИСПРАВЛЕНО: убраны пробелы в конце путей импорта!
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import {
             getAuth,
@@ -421,79 +455,98 @@
                 case 'auth/invalid-credential':
                 case 'auth/wrong-password':
                 case 'auth/user-not-found':
-                    return 'ОШИБКА! НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ!';
+                    return '❌ НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ!';
                 case 'auth/email-already-in-use':
-                    return 'Этот email уже используется!';
+                    return '📧 Этот email уже используется!';
                 case 'auth/invalid-email':
-                    return 'Неверный формат email!';
+                    return '📧 Неверный формат email!';
                 case 'auth/weak-password':
-                    return 'Пароль слишком слабый! Минимум 6 символов.';
+                    return '🔒 Пароль слишком слабый! Минимум 6 символов.';
                 case 'auth/popup-closed-by-user':
-                    return 'Вы закрыли окно входа.';
+                    return '🚪 Вы закрыли окно авторизации.';
+                case 'auth/popup-blocked':
+                    return '⚠️ Всплывающее окно заблокировано. Разрешите всплывающие окна.';
+                case 'auth/network-request-failed':
+                    return '🌐 Ошибка сети. Проверьте подключение.';
                 default:
-                    return 'Произошла ошибка. Попробуйте позже.';
+                    return error?.message || 'Произошла ошибка. Попробуйте позже.';
             }
         }
 
         function showMessage(text) {
             const el = document.getElementById('authMessage');
-            if (el) el.innerText = text;
+            if (el) {
+                el.innerText = text;
+                // Очистка сообщения через 5 секунд
+                setTimeout(() => {
+                    if (el.innerText === text) el.innerText = '';
+                }, 5000);
+            }
         }
 
-        // Вход по email/паролю — без перенаправления
+        // Вход по email/паролю
         document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail')?.value.trim();
             const password = document.getElementById('loginPassword')?.value;
             
             if (!email || !password) {
-                showMessage('Заполните все поля');
+                showMessage('⚠️ Заполните все поля!');
                 return;
             }
 
             try {
                 await signInWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Вход выполнен!');
+                // Оставляем на странице, без перенаправления
             } catch (error) {
                 console.error('Login error:', error);
-                showMessage('❌ ' + getErrorMessage(error));
+                showMessage(getErrorMessage(error));
             }
         });
 
-        // Регистрация — без перенаправления
+        // Регистрация
         document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('registerEmail')?.value.trim();
             const password = document.getElementById('registerPassword')?.value;
             
             if (!email || !password) {
-                showMessage('Заполните все поля');
+                showMessage('⚠️ Заполните все поля!');
                 return;
             }
 
             try {
                 await createUserWithEmailAndPassword(auth, email, password);
                 showMessage('✅ Регистрация успешна!');
+                // Оставляем на странице, без перенаправления
             } catch (error) {
                 console.error('Registration error:', error);
-                showMessage('❌ ' + getErrorMessage(error));
+                showMessage(getErrorMessage(error));
             }
         });
 
-        // Google авторизация — ИСПРАВЛЕНА
+        // Google авторизация - ИСПРАВЛЕНА
         document.getElementById('googleLoginBtn')?.addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
             
             try {
                 showMessage('⏳ Авторизация через Google...');
-                await signInWithPopup(auth, provider);
+                const result = await signInWithPopup(auth, provider);
+                
+                const user = result.user;
+                console.log('Успешный вход:', {
+                    email: user.email,
+                    name: user.displayName
+                });
+                
                 showMessage('✅ Вход через Google выполнен!');
             } catch (error) {
                 console.error('Google login error:', error);
                 
                 // Не показываем ошибку, если пользователь сам закрыл окно
                 if (error.code !== 'auth/popup-closed-by-user') {
-                    showMessage('❌ ' + getErrorMessage(error));
+                    showMessage(getErrorMessage(error));
                 } else {
                     document.getElementById('authMessage').innerText = '';
                 }
@@ -503,4 +556,4 @@
 
     <script src="script.js" defer></script>
 </body>
-</html>
+    </html>
