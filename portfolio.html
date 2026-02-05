@@ -2,61 +2,553 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Портфолио веб-разработчика — проекты с интерактивными неоновыми эффектами">
+    <title>Мои проекты | Портфолио</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Отступ под фиксированное меню — чтобы не сливалось */
-        body {
-            padding-top: 70px;
-            margin: 0;
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
-        /* Защита от наложения заголовка */
-        main {
-            padding-top: 10px;
-        }
-    </style>
-</head>
-<body>
 
-    <!-- Адаптивная навигация (копия из index.html) -->
-    <nav style="
-        background: #007bff;
-        padding: 12px 0;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        border-bottom: 1px solid #0056b3;
-    ">
-        <ul style="
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 58px; /* Высота навигации */
+        }
+
+        /* Декоративный фон с мерцающими точками */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                radial-gradient(circle at 85% 75%, rgba(255,255,255,0.06) 1px, transparent 1px),
+                radial-gradient(circle at 45% 55%, rgba(255,255,255,0.04) 1px, transparent 1px),
+                radial-gradient(circle at 60% 30%, rgba(0,245,255,0.05) 1px, transparent 1px);
+            pointer-events: none;
+            z-index: -1;
+            animation: twinkle 10s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        nav {
+            background: #007bff;
+            padding: 0.75rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            border-bottom: 1px solid #0056b3;
+        }
+
+        nav ul {
             list-style: none;
             display: flex;
             justify-content: space-around;
             margin: 0;
             padding: 0;
             flex-wrap: wrap;
-            gap: 5px;
-            max-width: 100%;
-        ">
-            <li><a href="index.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Главная</a></li>
-            <li><a href="about.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Обо мне</a></li>
-            <li><a href="portfolio.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Портфолио</a></li>
-            <li><a href="contact.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Контакты</a></li>
-            <li><a href="calculator.html" style="color: white; text-decoration: none; font-weight: bold; font-size: 0.92rem; padding: 7px 10px; border-radius: 4px;">Калькулятор</a></li>
+            gap: 0.3rem;
+            max-width: 100vw;
+        }
+
+        nav li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.92rem;
+            padding: 0.4rem 0.6rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        nav li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        nav li a.active {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Неоновый заголовок */
+        h2 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin: 30px 0 40px;
+            color: #fff;
+            letter-spacing: 3px;
+            position: relative;
+            animation: neon-glow-title 3s infinite alternate;
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        @keyframes neon-glow-title {
+            0% { color: #00ffcc; text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc; }
+            25% { color: #00ccff; text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff; }
+            50% { color: #ffff00; text-shadow: 0 0 10px #ffff00, 0 0 20px #ffff00; }
+            75% { color: #ff5500; text-shadow: 0 0 10px #ff5500, 0 0 20px #ff5500; }
+            100% { color: #33ff99; text-shadow: 0 0 10px #33ff99, 0 0 20px #33ff99; }
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Фильтры с неоновыми кнопками */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            background: transparent;
+            color: #00ffcc;
+            border: 2px solid #00ffcc;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,204,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .filter-btn:hover::before {
+            left: 100%;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 255, 204, 0.2);
+            box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+            color: white;
+        }
+
+        /* Сетка проектов */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        /* Карточка проекта с неоновой рамкой */
+        .project-card {
+            background: rgba(20, 20, 40, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 3px solid transparent;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            background: linear-gradient(45deg, #00ffcc, #00ccff, #ffff00, #ff5500, #33ff99);
+            z-index: -1;
+            border-radius: 19px;
+            animation: rotate-border 8s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px rgba(0,255,204,0.3);
+        }
+
+        .project-card:hover::before {
+            filter: brightness(1.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            margin: 0 0 10px;
+            color: #00ffcc;
+            animation: text-glow 2s infinite alternate;
+        }
+
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 8px #00ffcc; }
+            100% { text-shadow: 0 0 15px #00ffcc, 0 0 25px #00ffcc; }
+        }
+
+        .project-description {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            padding: 4px 12px;
+            background: rgba(0, 123, 255, 0.2);
+            color: #00ffcc;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid #007bff;
+            text-shadow: 0 0 6px rgba(0, 255, 204, 0.7);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            justify-content: space-between;
+        }
+
+        .project-link {
+            flex: 1;
+            padding: 10px 15px;
+            background: transparent;
+            color: #00ffcc;
+            border: 2px solid #00ffcc;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,204,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-link:hover::before {
+            left: 100%;
+        }
+
+        .project-link:hover {
+            background: rgba(0, 255, 204, 0.1);
+            box-shadow: 0 0 15px #00ffcc;
+            color: white;
+        }
+
+        .project-link.github {
+            color: #ff5555;
+            border-color: #ff5555;
+        }
+
+        .project-link.github::before {
+            background: linear-gradient(90deg, transparent, rgba(255,85,85,0.2), transparent);
+        }
+
+        .project-link.github:hover {
+            background: rgba(255, 85, 85, 0.1);
+            box-shadow: 0 0 15px #ff5555;
+        }
+
+        /* Модальное окно */
+        #modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(15, 12, 41, 0.95);
+            backdrop-filter: blur(20px);
+            border: 4px solid #00ffcc;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 50px #00ffcc, 0 0 100px #00ffcc;
+            z-index: 2000;
+            animation: modal-fade-in 0.3s ease;
+        }
+
+        @keyframes modal-fade-in {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        #modal[open] {
+            display: block;
+        }
+
+        #modal:not([open]) {
+            display: none;
+        }
+
+        #modal::backdrop {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        #modal-title {
+            font-size: 1.8rem;
+            margin: 0 0 20px;
+            color: #00ffcc;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        #modal-description {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        #modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #00ffcc;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+            margin-bottom: 20px;
+        }
+
+        #close-modal {
+            padding: 12px 30px;
+            background: transparent;
+            color: #ff5555;
+            border: 2px solid #ff5555;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        #close-modal:hover {
+            background: rgba(255, 85, 85, 0.1);
+            box-shadow: 0 0 15px #ff5555;
+        }
+
+        /* Анимация появления карточек */
+        @keyframes card-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card {
+            animation: card-fade-in 0.5s ease forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        footer {
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 40px;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 20px;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+                margin: 20px 0 30px;
+            }
+
+            .project-image {
+                height: 180px;
+            }
+
+            .project-title {
+                font-size: 1.2rem;
+            }
+
+            .filters {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 2px;
+            }
+
+            nav li a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+                margin: 15px 0 25px;
+            }
+
+            .project-content {
+                padding: 15px;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .project-link {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav aria-label="Основная навигация">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html" class="active">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="portfolio">
-            <h2>Мои проекты</h2>
+            <h2>↓ МОИ ПРОЕКТЫ ↓</h2>
+
             <div class="filters">
-                <button class="filter-btn active" data-filter="all">Все</button>
+                <button class="filter-btn active" data-filter="all">Все проекты</button>
                 <button class="filter-btn" data-filter="js">JavaScript</button>
                 <button class="filter-btn" data-filter="react">React</button>
-                <button class="filter-btn" data-filter="css">CSS</button>
+                <button class="filter-btn" data-filter="css">CSS/HTML</button>
+                <button class="filter-btn" data-filter="firebase">Firebase</button>
             </div>
+
             <div id="projects-grid" class="grid">
                 <!-- Проекты будут загружены через JS -->
             </div>
@@ -67,7 +559,8 @@
     <dialog id="modal">
         <h3 id="modal-title"></h3>
         <p id="modal-description"></p>
-        <img id="modal-image" src="" alt="">
+        <img id="modal-image" src="" alt="Скриншот проекта">
+        <div id="modal-links"></div>
         <button id="close-modal">Закрыть</button>
     </dialog>
 
@@ -75,7 +568,165 @@
         <p>&copy; 2025. Все права защищены.</p>
     </footer>
 
-    <script src="projects.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Данные о проектах
+        const projects = [
+            {
+                id: 1,
+                title: "Интерактивный калькулятор",
+                description: "Современный калькулятор с неоновым дизайном и анимациями. Полностью адаптивный интерфейс с поддержкой всех математических операций.",
+                image: "https://images.unsplash.com/photo-1551650975-87de45978c24?w=600",
+                tags: ["JavaScript", "CSS", "HTML"],
+                category: ["js", "css"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                id: 2,
+                title: "Портфолио разработчика",
+                description: "Мое собственное портфолио с киберпанк эстетикой, неоновыми эффектами и плавными анимациями. Адаптивный дизайн для всех устройств.",
+                image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=600",
+                tags: ["React", "CSS", "Firebase"],
+                category: ["react", "css", "firebase"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                id: 3,
+                title: "Система аутентификации",
+                description: "Безопасная система входа и регистрации с поддержкой Google OAuth. Интеграция с Firebase для хранения данных пользователей.",
+                image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600",
+                tags: ["Firebase", "JavaScript", "Google Auth"],
+                category: ["firebase", "js"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                id: 4,
+                title: "Анимированный лендинг",
+                description: "Современный лендинг с параллакс эффектами, глитч анимациями и интерактивными элементами. Оптимизирован для скорости загрузки.",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600",
+                tags: ["CSS", "HTML", "JavaScript"],
+                category: ["css", "js"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                id: 5,
+                title: "Todo приложение",
+                description: "Приложение для управления задачами с возможностью добавления, редактирования и удаления. Данные сохраняются в локальном хранилище.",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600",
+                tags: ["React", "Local Storage"],
+                category: ["react", "js"],
+                liveLink: "#",
+                githubLink: "#"
+            },
+            {
+                id: 6,
+                title: "Погодное приложение",
+                description: "Приложение для отображения погоды с анимированными иконками и неоновым интерфейсом. Получение данных через API с кэшированием.",
+                image: "https://images.unsplash.com/photo-1475070929565-c985b496cb9f?w=600",
+                tags: ["JavaScript", "API", "CSS"],
+                category: ["js", "css"],
+                liveLink: "#",
+                githubLink: "#"
+            }
+        ];
+
+        // Функция для рендеринга проектов
+        function renderProjects(filter = 'all') {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = '';
+
+            const filteredProjects = filter === 'all' 
+                ? projects 
+                : projects.filter(project => project.category.includes(filter));
+
+            filteredProjects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <img src="${project.image}" alt="${project.title}" class="project-image" loading="lazy">
+                    <div class="project-content">
+                        <h3 class="project-title">${project.title}</h3>
+                        <p class="project-description">${project.description}</p>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="project-links">
+                            <a href="${project.liveLink}" class="project-link" target="_blank">Демо</a>
+                            <a href="${project.githubLink}" class="project-link github" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => openModal(project));
+                grid.appendChild(card);
+            });
+        }
+
+        // Функция для открытия модального окна
+        function openModal(project) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalImage = document.getElementById('modal-image');
+            const modalLinks = document.getElementById('modal-links');
+
+            modalTitle.textContent = project.title;
+            modalDescription.textContent = project.description;
+            modalImage.src = project.image;
+            modalImage.alt = project.title;
+
+            modalLinks.innerHTML = `
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <a href="${project.liveLink}" class="project-link" target="_blank" style="flex: 1;">Посмотреть демо</a>
+                    <a href="${project.githubLink}" class="project-link github" target="_blank" style="flex: 1;">Исходный код</a>
+                </div>
+            `;
+
+            modal.showModal();
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.close();
+        }
+
+        // Обработчики фильтров
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Добавляем активный класс к нажатой кнопке
+                button.classList.add('active');
+                
+                // Рендерим проекты с новым фильтром
+                const filter = button.dataset.filter;
+                renderProjects(filter);
+            });
+        });
+
+        // Обработчик закрытия модального окна
+        document.getElementById('close-modal').addEventListener('click', closeModal);
+
+        // Закрытие модального окна при клике на затемненную область
+        document.getElementById('modal').addEventListener('click', (e) => {
+            const modal = e.target;
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Инициализация - рендерим все проекты при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProjects('all');
+        });
+    </script>
 </body>
-</html
+</html>
+
