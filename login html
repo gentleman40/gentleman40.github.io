@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в систему</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: #0a0a0a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .login-header {
+            padding: 40px 30px 25px;
+            text-align: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .gentleman-text {
+            text-align: center;
+            padding: 0 30px 20px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            background: #252525;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: #2d2d2d;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background: #3a3a3a;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-button:hover {
+            background: #252525;
+            border-color: #3a3a3a;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon.google {
+            background: #4285F4;
+            border-radius: 50%;
+            color: white;
+        }
+
+        .social-icon.github {
+            background: #24292e;
+            border-radius: 50%;
+            color: white;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #2d2d2d;
+        }
+
+        .divider-text {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .register-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .help-link {
+            display: block;
+            text-align: center;
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            margin-bottom: 25px;
+            transition: all 0.2s;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
+        }
+
+        .terms {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            line-height: 1.6;
+            padding: 0 30px 25px;
+            margin-bottom: 10px;
+        }
+
+        .terms a {
+            color: #76b0ff;
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 12px;
+            }
+            
+            .login-title {
+                font-size: 24px;
+            }
+            
+            .input-field {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            
+            .login-button {
+                padding: 14px;
+                font-size: 16px;
+            }
+            
+            .social-button {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <button class="close-button" aria-label="Закрыть">✕</button>
+        
+        <div class="login-header">
+            <h1 class="login-title">Добро пожаловать в Wan</h1>
+        </div>
+        
+        <div class="gentleman-text">GENTLEMAN40</div>
+        
+        <div style="padding: 30px">
+            <div class="input-group">
+                <label class="input-label" for="email">Эл. адрес</label>
+                <input type="email" id="email" class="input-field" placeholder="Эл. адрес" autocomplete="email">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label" for="password">Пароль</label>
+                <input type="password" id="password" class="input-field" placeholder="Пароль" autocomplete="current-password">
+                <span class="password-toggle">👁️</span>
+            </div>
+            
+            <button class="login-button" id="login-btn">Вход</button>
+            
+            <div class="login-options">
+                <a href="#" class="register-link">У вас нет аккаунта? Зарегистрируйтесь</a>
+                <a href="#" class="forgot-link">Забыли пароль</a>
+            </div>
+            
+            <div class="gentleman-text">GENTLEMAN40</div>
+            
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">или</div>
+                <div class="divider-line"></div>
+            </div>
+            
+            <div class="social-login">
+                <button class="social-button">
+                    <span class="social-icon google">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.4-3.3-7.4-7.3 0-4.095 3.305-7.3 7.4-7.3 2.167 0 3.983 1.124 5.055 2.877L12.24 10.285z" fill="white"/>
+                        </svg>
+                    </span>
+                    Войти через Google
+                </button>
+                
+                <button class="social-button">
+                    <span class="social-icon github">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.043-1.61-4.043-1.61-.547-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.835 2.807 1.305 3.492.998.107-.776.418-1.305.762-1.604-2.665-.3-5.467-1.332-5.467-5.93 0-1.31.469-2.38 1.236-3.22-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.405 1.02.006 2.047.138 3.006.405 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.873.118 3.176.77.84 1.235 1.911 1.235 3.22 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 22.094 24 17.594 24 12.297c0-6.627-5.373-12-12-12" fill="white"/>
+                        </svg>
+                    </span>
+                    Войти через GitHub
+                </button>
+            </div>
+            
+            <a href="#" class="help-link">Справка</a>
+            
+            <div class="terms">
+                Ваш вход в систему означает согласие с <a href="#">Условиями обслуживания</a> и <a href="#">Политика конфиденциальности</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordToggle = document.querySelector('.password-toggle');
+            const passwordInput = document.getElementById('password');
+            const loginBtn = document.getElementById('login-btn');
+            
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+            
+            loginBtn.addEventListener('click', function() {
+                const email = document.getElementById('email').value;
+                const password = passwordInput.value;
+                
+                if (email && password) {
+                    this.textContent = 'Вход...';
+                    this.disabled = true;
+                    
+                    // Проверка email формата
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(email)) {
+                        alert('Неверный формат email');
+                        this.textContent = 'Вход';
+                        this.disabled = false;
+                        return;
+                    }
+                    
+                    // Имитация проверки (в реальном проекте здесь запрос к серверу)
+                    setTimeout(() => {
+                        // ✅ Успешная авторизация
+                        localStorage.setItem('isAuthenticated', 'true');
+                        
+                        // Перенаправляем на главную
+                        window.location.href = '/index.html';
+                    }, 1000);
+                } else {
+                    alert('Пожалуйста, заполните все поля');
+                }
+            });
+            
+            // Кнопка закрытия — выход
+            document.querySelector('.close-button').addEventListener('click', function() {
+                if (confirm('Выйти из системы?')) {
+                    localStorage.removeItem('isAuthenticated');
+                    window.location.reload();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
