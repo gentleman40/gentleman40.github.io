@@ -170,144 +170,241 @@
             color: white;
         }
 
-        /* auth styles */
-        #auth-section {
-            padding: 20px;
+        /* НОВЫЙ СТИЛЬ ФОРМЫ АВТОРИЗАЦИИ */
+        .login-container {
             width: 100%;
-            background: rgba(25, 25, 45, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 4px solid rgba(255,255,255,0.06);
+            max-width: 420px;
+            background: #0a0a0a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            position: relative;
             margin: 0 0 40px;
-            max-width: 100%;
         }
 
-        .auth-title {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.4rem;
-            font-weight: bold;
-            animation: auth-title-glow 3s infinite alternate;
-            text-shadow: 0 0 10px currentColor;
-        }
-
-        @keyframes auth-title-glow {
-            0%   { color: #ffff00; }
-            50%  { color: #ffcc00; }
-            100% { color: #ff9900; }
-        }
-
-        #auth-section input {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            background: rgba(30, 30, 50, 0.8);
-            border: 2px solid #ffff00;
-            border-radius: 6px;
-            color: white;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            font-family: inherit;
-        }
-
-        #auth-section input:focus {
-            border-color: #ffcc00;
-            box-shadow: 0 0 10px #ffcc00;
-        }
-
-        #auth-section button {
-            width: 100%;
-            padding: 12px;
+        .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
             border: none;
-            border-radius: 6px;
+            color: #888;
+            font-size: 24px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-family: inherit;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            z-index: 10;
         }
 
-        #loginForm button {
-            background: #007bff;
+        .close-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .login-header {
+            padding: 40px 30px 25px;
+            text-align: center;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+            color: #fff;
+        }
+
+        .gentleman-text {
+            text-align: center;
+            padding: 0 30px 20px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #aaa;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            background: #1a1a1a;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            background: #252525;
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 16px;
+            background: #2d2d2d;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background: #3a3a3a;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-button:hover {
+            background: #252525;
+            border-color: #3a3a3a;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon.google {
+            background: #4285F4;
+            border-radius: 50%;
             color: white;
-            box-shadow: 0 0 10px #007bff;
         }
 
-        #loginForm button:hover {
-            background: #0056b3;
-            box-shadow: 0 0 15px #007bff;
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
         }
 
-        #registerForm button {
-            background: #28a745;
-            color: white;
-            box-shadow: 0 0 10px #28a745;
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #2d2d2d;
         }
 
-        #registerForm button:hover {
-            background: #1e7e34;
-            box-shadow: 0 0 15px #28a745;
+        .divider-text {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        #authMessage {
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .register-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .auth-message {
             text-align: center;
             margin-top: 15px;
             font-weight: bold;
             color: #ff5555;
             text-shadow: 0 0 8px #ff5555;
             min-height: 1.2em;
-        }
-
-        /* КРАСИВАЯ КНОПКА GOOGLE - УЛУЧШЕНАЯ */
-        .google-login-btn {
-            background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
-            color: white !important;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.05rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            max-width: 320px;
-            margin: 25px auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .google-login-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .google-login-btn:hover::before {
-            left: 100%;
-        }
-
-        .google-login-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-        }
-
-        .google-login-btn:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .google-login-btn img {
-            width: 24px;
-            height: 24px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            padding: 10px;
+            background: rgba(255, 85, 85, 0.1);
+            border-radius: 6px;
         }
 
         footer {
@@ -322,7 +419,6 @@
             padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
         }
 
-        /* small helper for screen-reader-only labels */
         .sr-only {
             position: absolute !important;
             width: 1px; height: 1px;
@@ -347,20 +443,24 @@
                 font-size: 1rem;
                 padding: 8px 24px;
             }
-            .auth-title {
-                font-size: 1.2rem;
-            }
-            #auth-section {
-                border-width: 3px;
-            }
-            .google-login-btn {
+            .login-container {
                 max-width: 100%;
-                padding: 12px 24px;
-                font-size: 0.95rem;
+                border-radius: 12px;
             }
-            .google-login-btn img {
-                width: 20px;
-                height: 20px;
+            .login-title {
+                font-size: 24px;
+            }
+            .input-field {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            .login-button {
+                padding: 14px;
+                font-size: 16px;
+            }
+            .social-button {
+                padding: 14px;
+                font-size: 15px;
             }
         }
     </style>
@@ -387,39 +487,59 @@
 
         <a href="portfolio.html" class="neon-btn" role="button">Смотреть проекты</a>
 
-        <section id="auth-section" aria-labelledby="auth-heading">
-            <h2 id="auth-heading" class="auth-title">Вход и регистрация</h2>
+        <!-- НОВАЯ ФОРМА АВТОРИЗАЦИИ -->
+        <div class="login-container">
+            <button class="close-button" id="closeAuthBtn" aria-label="Закрыть">✕</button>
 
-            <form id="loginForm" novalidate>
-                <label class="sr-only" for="loginEmail">Email для входа</label>
-                <input type="email" id="loginEmail" name="email" placeholder="Email" required autocomplete="email">
-                <label class="sr-only" for="loginPassword">Пароль для входа</label>
-                <input type="password" id="loginPassword" name="password" placeholder="Пароль" required autocomplete="current-password" minlength="6">
-                <button type="submit">Войти</button>
-            </form>
-
-            <form id="registerForm" novalidate>
-                <label class="sr-only" for="registerEmail">Email для регистрации</label>
-                <input type="email" id="registerEmail" name="email" placeholder="Email" required autocomplete="email">
-                <label class="sr-only" for="registerPassword">Пароль для регистрации</label>
-                <input type="password" id="registerPassword" name="password" placeholder="Пароль (6+ символов)" required autocomplete="new-password" minlength="6">
-                <button type="submit">Зарегистрироваться</button>
-            </form>
-
-            <div style="text-align: center; margin: 25px 0; position: relative;">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px;">
-                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
-                    <span style="color: #888; font-size: 0.9rem; white-space: nowrap;">или</span>
-                    <div style="flex: 1; height: 1px; background: rgba(255,255,255,0.2);"></div>
-                </div>
-                <button id="googleLoginBtn" class="google-login-btn" type="button" aria-label="Войти через Google">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="24" height="24" alt="Google G">
-                    <span>Войти через Google</span>
-                </button>
+            <div class="login-header">
+                <h1 class="login-title">Добро пожаловать</h1>
             </div>
 
-            <p id="authMessage" aria-live="polite"></p>
-        </section>
+            <div class="gentleman-text">GENTLEMAN40</div>
+
+            <div style="padding: 30px">
+                <form id="loginForm" novalidate>
+                    <div class="input-group">
+                        <label class="input-label" for="loginEmail">Эл. адрес</label>
+                        <input type="email" id="loginEmail" class="input-field" placeholder="Эл. адрес" autocomplete="email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label" for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" class="input-field" placeholder="Пароль" autocomplete="current-password" minlength="6" required>
+                        <span class="password-toggle" id="passwordToggle">👁️</span>
+                    </div>
+
+                    <button type="submit" class="login-button" id="loginBtn">Вход</button>
+                </form>
+
+                <div class="login-options">
+                    <a href="#" class="register-link" id="showRegister">У вас нет аккаунта? Зарегистрируйтесь</a>
+                    <a href="#" class="forgot-link">Забыли пароль</a>
+                </div>
+
+                <div class="gentleman-text">GENTLEMAN40</div>
+
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <div class="divider-text">или</div>
+                    <div class="divider-line"></div>
+                </div>
+
+                <div class="social-login">
+                    <button class="social-button" id="googleLoginBtn">
+                        <span class="social-icon google">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.4-3.3-7.4-7.3 0-4.095 3.305-7.3 7.4-7.3 2.167 0 3.983 1.124 5.055 2.877L12.24 10.285z" fill="white"/>
+                            </svg>
+                        </span>
+                        Войти через Google
+                    </button>
+                </div>
+
+                <div class="auth-message" id="authMessage" aria-live="polite"></div>
+            </div>
+        </div>
     </main>
 
     <footer>
@@ -484,15 +604,51 @@
             }
         }
 
+        // Переключатель видимости пароля
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('loginPassword');
+
+        if (passwordToggle && passwordInput) {
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+
+        // Кнопка закрытия - выход из системы
+        const closeAuthBtn = document.getElementById('closeAuthBtn');
+        if (closeAuthBtn) {
+            closeAuthBtn.addEventListener('click', function() {
+                if (confirm('Выйти из системы?')) {
+                    auth.signOut().then(() => {
+                        showMessage('✅ Выход выполнен!');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 1000);
+                    }).catch((error) => {
+                        console.error('Sign out error:', error);
+                        showMessage('❌ Ошибка при выходе');
+                    });
+                }
+            });
+        }
+
         // Вход по email/паролю
         document.getElementById('loginForm')?.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('loginEmail')?.value.trim();
             const password = document.getElementById('loginPassword')?.value;
-            
+
             if (!email || !password) {
                 showMessage('⚠️ Заполните все поля!');
                 return;
+            }
+
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.textContent = 'Вход...';
+                loginBtn.disabled = true;
             }
 
             try {
@@ -502,48 +658,38 @@
             } catch (error) {
                 console.error('Login error:', error);
                 showMessage(getErrorMessage(error));
+            } finally {
+                if (loginBtn) {
+                    loginBtn.textContent = 'Вход';
+                    loginBtn.disabled = false;
+                }
             }
         });
 
-        // Регистрация
-        document.getElementById('registerForm')?.addEventListener('submit', async (e) => {
+        // Переключение на регистрацию
+        document.getElementById('showRegister')?.addEventListener('click', (e) => {
             e.preventDefault();
-            const email = document.getElementById('registerEmail')?.value.trim();
-            const password = document.getElementById('registerPassword')?.value;
-            
-            if (!email || !password) {
-                showMessage('⚠️ Заполните все поля!');
-                return;
-            }
-
-            try {
-                await createUserWithEmailAndPassword(auth, email, password);
-                showMessage('✅ Регистрация успешна!');
-                // Оставляем на странице, без перенаправления
-            } catch (error) {
-                console.error('Registration error:', error);
-                showMessage(getErrorMessage(error));
-            }
+            showMessage('Регистрация будет доступна позже!');
         });
 
-        // Google авторизация - ИСПРАВЛЕНА
+        // Вход через Google
         document.getElementById('googleLoginBtn')?.addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
-            
+
             try {
                 showMessage('⏳ Авторизация через Google...');
                 const result = await signInWithPopup(auth, provider);
-                
+
                 const user = result.user;
                 console.log('Успешный вход:', {
                     email: user.email,
                     name: user.displayName
                 });
-                
+
                 showMessage('✅ Вход через Google выполнен!');
             } catch (error) {
                 console.error('Google login error:', error);
-                
+
                 // Не показываем ошибку, если пользователь сам закрыл окно
                 if (error.code !== 'auth/popup-closed-by-user') {
                     showMessage(getErrorMessage(error));
@@ -556,4 +702,4 @@
 
     <script src="script.js" defer></script>
 </body>
-    </html>
+</html>
