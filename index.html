@@ -275,4 +275,313 @@
             border: none;
             border-radius: 10px;
             color: #fff;
-            font-size: 1
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-button:hover {
+            background: #3a3a3a;
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .login-button:disabled {
+            background: #444;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-button:hover {
+            background: #252525;
+            border-color: #3a3a3a;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-icon.google {
+            background: #4285F4;
+            border-radius: 50%;
+            color: white;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #2d2d2d;
+        }
+
+        .divider-text {
+            color: #888;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .register-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .forgot-link {
+            color: #76b0ff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .auth-message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ff5555;
+            text-shadow: 0 0 8px #ff5555;
+            min-height: 1.2em;
+            padding: 10px;
+            background: rgba(255, 85, 85, 0.1);
+            border-radius: 6px;
+        }
+
+        /* Формы входа и регистрации */
+        .auth-forms {
+            padding: 30px;
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        footer {
+            background: rgba(10, 10, 25, 0.9);
+            color: #bbb;
+            text-align: center;
+            padding: 0.625rem 0;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            box-sizing: border-box;
+            padding-bottom: max(0.625rem, env(safe-area-inset-bottom));
+        }
+
+        .sr-only {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0);
+            white-space: nowrap; border: 0;
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 1.25rem 1rem;
+            }
+            .neon-title {
+                font-size: 1.3rem;
+                margin: 15px 0 8px;
+            }
+            .neon-frame {
+                padding-top: 60%;
+            }
+            .neon-btn {
+                margin: 20px 0;
+                font-size: 1rem;
+                padding: 8px 24px;
+            }
+            .login-container {
+                max-width: 100%;
+                border-radius: 12px;
+            }
+            .login-title {
+                font-size: 24px;
+            }
+            .input-field {
+                padding: 14px 16px;
+                font-size: 15px;
+            }
+            .login-button {
+                padding: 14px;
+                font-size: 16px;
+            }
+            .social-button {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav aria-label="Основная навигация">
+        <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="about.html">Обо мне</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="calculator.html">Калькулятор</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="neon-title">↓ ВЕБ РАЗРАБОТКА ↓</h1>
+
+        <div class="neon-frame" aria-hidden="false">
+            <img src="https://github.com/user-attachments/assets/2666e1d1-fd0f-4720-bca2-131acb35cabe"
+                 alt="Портрет разработчика / превью проекта" loading="lazy">
+        </div>
+
+        <a href="portfolio.html" class="neon-btn" role="button">Смотреть проекты</a>
+
+        <!-- НОВАЯ ФОРМА АВТОРИЗАЦИИ -->
+        <div class="login-container">
+            <button class="close-button" id="closeAuthBtn" aria-label="Закрыть">✕</button>
+
+            <div class="login-header">
+                <h1 class="login-title">Добро пожаловать</h1>
+            </div>
+
+            <div class="gentleman-text">GENTLEMAN40</div>
+
+            <div class="auth-forms">
+                <!-- Форма входа -->
+                <div id="loginSection" class="form-section active">
+                    <form id="loginForm" novalidate>
+                        <div class="input-group">
+                            <label class="input-label" for="loginEmail">Эл. адрес</label>
+                            <input type="email" id="loginEmail" class="input-field" placeholder="Эл. адрес" autocomplete="email" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="loginPassword">Пароль</label>
+                            <input type="password" id="loginPassword" class="input-field" placeholder="Пароль" autocomplete="current-password" minlength="6" required>
+                            <span class="password-toggle" id="loginPasswordToggle">👁️</span>
+                        </div>
+
+                        <button type="submit" class="login-button" id="loginBtn">Вход</button>
+                    </form>
+
+                    <div class="login-options">
+                        <a href="#" class="register-link" id="showRegisterLink">У вас нет аккаунта? Зарегистрируйтесь</a>
+                        <a href="#" class="forgot-link" id="forgotPasswordLink">Забыли пароль</a>
+                    </div>
+
+                    <div class="gentleman-text">GENTLEMAN40</div>
+
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <div class="divider-text">или</div>
+                        <div class="divider-line"></div>
+                    </div>
+
+                    <div class="social-login">
+                        <button class="social-button" id="googleLoginBtn">
+                            <span class="social-icon google">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.4-3.3-7.4-7.3 0-4.095 3.305-7.3 7.4-7.3 2.167 0 3.983 1.124 5.055 2.877L12.24 10.285z" fill="white"/>
+                                </svg>
+                            </span>
+                            Войти через Google
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Форма регистрации -->
+                <div id="registerSection" class="form-section">
+                    <form id="registerForm" novalidate>
+                        <div class="input-group">
+                            <label class="input-label" for="registerEmail">Эл. адрес</label>
+                            <input type="email" id="registerEmail" class="input-field" placeholder="Эл. адрес" autocomplete="email" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-label" for="registerPassword">Пароль</label>
+                            <input type="password" id="registerPassword" class="input-field" placeholder="Пароль (6+ символов)" autocomplete="new-password" minlength="6" required>
+                            <span class="password-toggle" id="registerPasswordToggle">👁️</span>
+                        </div>
+
+                        <button type="submit" class="login-button" id="registerBtn">Зарегистрироваться</button>
+                    </form>
+
+                    <div class="login-options">
+                        <a href="#" class="register-link" id="showLoginLink">Уже есть аккаунт? Войти</a>
+                    </div>
+
+                    <div class="gentleman-text">GENTLEMAN40</div>
+                </div>
+
+                <div class="auth-message" id="authMessage" aria-live="polite"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025. Все права защищены.</p>
+    </footer>
